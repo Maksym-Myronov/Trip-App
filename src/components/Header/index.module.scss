@@ -1,0 +1,64 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 60px 20px 60px;
+    align-items: center;
+    background: rgb(16, 97, 202);
+    color: white;
+
+    &__trip {
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    &__search {
+        display: flex;
+    }
+
+    &__icon {
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+        background: rgba(88, 165, 255, 1);
+        border-radius: 3px;
+    }
+
+    &__search__input {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 6px;
+        margin-left: 40px;
+        padding: 0px 3px 0px 3px;
+        width: 268px;
+        background: white;
+    }
+
+    &__input {
+        background: none;
+        padding: 8px;
+        outline: none;
+        color: white;
+    }
+
+    &__regist {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+
+    &__button {
+        cursor: pointer;
+        background: none;
+        font-size: 1rem;
+        color: white;
+    }
+
+    &__user {
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+        background: none;
+        color: white;
+    }
+}
