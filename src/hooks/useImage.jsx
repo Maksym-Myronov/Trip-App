@@ -7,6 +7,8 @@ import drizzle from '../assets/images/09_light_rain_color.svg';
 import heavyRain from '../assets/images/14_thunderstorm_color (1).svg';
 import partlyCloudy from '../assets/images/35_partly_cloudy_daytime_color.svg';
 import fog from '../assets/images/15_fog_color.svg';
+import cloudyDay from '../assets/images/04_sun_cloudy_color.svg';
+import cloudyNight from '../assets/images/05_moon_cloudy_color.svg'
 
 export const useImage = () => {
 
@@ -21,6 +23,12 @@ export const useImage = () => {
             break;
         case 'rain':
             imageSource = rain;
+            break;
+        case 'partly-cloudy-day':
+            imageSource = cloudyDay;
+            break;
+        case 'partly-cloudy-night':
+            imageSource = cloudyNight
             break;
         case 'snow':
             imageSource = snow;

@@ -41,6 +41,21 @@ const ModalWindow = ({handleOpenModalWindow}) => {
         });
     }, [API_KEY]);
 
+    const currentDate = new Date();
+    const futureDate = new Date();
+    futureDate.setDate(currentDate.getDate() + 15);
+
+    const formatDate = (date) => {
+    const year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+
+    month = month < 10 ? `0${month}` : month;
+    day = day < 10 ? `0${day}` : day;
+
+    return `${year}-${month}-${day}`;
+    };
+
     return (
         <div className={styles.window}>
             <div className={styles.window__container}>
@@ -62,16 +77,24 @@ const ModalWindow = ({handleOpenModalWindow}) => {
                     <div>
                         <p className={styles.window__text}><span>*</span> Start date</p>
                         <input 
-                            type="date" 
-                            placeholder="Select start date" 
+                            id="dateInput"
+                            placeholder="Select Date" 
+                            type="text" 
+                            onFocus={() => { document.getElementById('dateInput').type = 'date'; }}
+                            min={formatDate(currentDate)}
+                            max={formatDate(futureDate)}
                             className={styles.window__input} 
                         />
                     </div>
                     <div>
                         <p className={styles.window__text}><span>*</span> End date</p>
                         <input 
-                            type="date" 
-                            placeholder="Select end date" 
+                            id="date"
+                            placeholder="Select Date" 
+                            type="text" 
+                            onFocus={() => { document.getElementById('date').type = 'date'; }}
+                            min={formatDate(currentDate)}
+                            max={formatDate(futureDate)}
                             className={styles.window__input} 
                         />
                     </div>

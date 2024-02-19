@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import ModalWindow from '../ModalWindow';
 //Styles
 import styles from './index.module.scss'
 //Images
 import photo from '../../../assets/images/1mc6b12000b8d5wjd42F4_R_550_412_R5_D.webp'
-import ModalWindow from '../ModalWindow';
 
 const CitiesCard = () => {
 
@@ -19,7 +19,7 @@ const CitiesCard = () => {
     return (
         <div className={styles.widget}>
             <div className={styles.widget__container}>
-                <img src="https://maps.googleapis.com/maps/api/place/js/PhotoService.GetPhoto?1sATplDJaXMuZwqg1XKnVwu7oEYCizsiJwWpgBlfOrc9Uldri-nbCoUPjFU8gR5lUgIIk64ylS6E6j3d-tJJjC7uw77KtVVZcmZNkE2gcflkdJ3pGC23yDzKU9IYRBaaXbj_sx1MWZhTTQi0YmDGOUk6ycArszakStkYDyI_J79BEl8AQhuLbq&3u350&4u350&5m1&2e1&callback=none&key=AIzaSyCLPkvspLlXA0SiDV63iVm4s2js_FZ7YYA&token=80675" alt="photo" className={styles.widget__images} />
+                <img src={`https://lh3.googleusercontent.com/places/ANXAkqEY2x1RQlelpu37XnhSQ2liDsMqZB3sbH-6_WEyZuwCo9ceFxIdX8HHAdQc2myRiARP8V8N9Fj80LaFZB97H3AuECPYbMG6gL8=s1600-w1079`} alt="photo" className={styles.widget__images} />
                 <div className={styles.widget__info}>
                     <h1>{cityName}</h1>
                     <p>14.07.2023 - 21.07.2023</p>

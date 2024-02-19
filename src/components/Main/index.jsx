@@ -21,7 +21,7 @@ const Main = () => {
                 />
             </div>
             <div>
-                <Timer />
+                <Timer renderWeatherImage={renderWeatherImage} />
             </div>
         </div>
     )

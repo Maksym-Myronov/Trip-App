@@ -1,18 +1,18 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+
 .window {
     width: 100vw;
     height: 100vh;
     position: fixed;
-    display: flex;
-    justify-content: center;
     top: 0;
     left: 0;
-    align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 100;
-
+    @include d-flex( flex, null, center, center);
 
     &__container {
-        background: white;
+        background: $white;
         width: 700px;
         height: 700px;
         border-radius: 10px;
@@ -24,9 +24,7 @@
     }
 
     &__header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        @include d-flex( flex, null, space-between, center);
     }
 
     &__hr {
@@ -77,8 +75,26 @@
         background: #58A5FF;
         border-radius: 5px;
         padding: 10px 15px 10px 16px;
-        color: white;
+        color: $white;
         cursor: pointer;
     }
 
+}
+
+#dateInput, #date {
+    background: none;
+    display: block;
+    margin: 20px auto;
+    padding: 15px 45px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 25px;
+    text-align: center;
+    transition: 250ms width ease, 250ms border-color ease;
+}
+
+#dateInput, #date:focus{
+    width: 230px;
+    border-color: #6fb98f;
 }
