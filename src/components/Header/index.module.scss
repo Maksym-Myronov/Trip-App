@@ -1,10 +1,11 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
 .header {
-    display: flex;
-    justify-content: space-between;
+    @include d-flex( flex, null, space-between, center);
     padding: 20px 60px 20px 60px;
-    align-items: center;
     background: rgb(16, 97, 202);
-    color: white;
+    color: $white;
 
     &__trip {
         font-size: 1.5rem;
@@ -24,34 +25,31 @@
     }
 
     &__search__input {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        @include d-flex( flex, null, space-between, center);
         border-radius: 6px;
         margin-left: 40px;
         padding: 0px 3px 0px 3px;
         width: 268px;
-        background: white;
+        background: $white;
     }
 
     &__input {
         background: none;
         padding: 8px;
         outline: none;
-        color: white;
+        color: $white;
     }
 
     &__regist {
-        display: flex;
         gap: 20px;
-        align-items: center;
+        @include d-flex( flex, null, null, center);
     }
 
     &__button {
         cursor: pointer;
         background: none;
         font-size: 1rem;
-        color: white;
+        color: $white;
     }
 
     &__user {
@@ -59,6 +57,6 @@
         height: 25px;
         cursor: pointer;
         background: none;
-        color: white;
+        color: $white;
     }
 }

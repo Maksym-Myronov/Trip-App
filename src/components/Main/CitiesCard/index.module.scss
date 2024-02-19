@@ -1,11 +1,13 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+
 .widget {
     background: #f0d3d8;
     width: 1100px;
     height: 400px;
     padding: 20px 20px 20px 20px;
     border-radius: 10px;
-    display: flex;
-    align-items: center;
+    @include d-flex( flex, null, null, center);
     gap: 20px;
 
     &__images {
@@ -15,7 +17,7 @@
     }
 
     &__container {
-        background-color: white;
+        background-color: $white;
         width: 260px;
         height: 350px;
         border-radius: 10px;

@@ -1,22 +1,20 @@
+@import '../../../styles/mixins.scss';
+
 .timer {
+    @include d-flex( flex, null, center, center);
     background: #f0d3d8;
     width: 680px;
     height: 670px;
     padding: 20px 20px 20px 20px;
     border-radius: 10px;
-    display: flex;
-    align-items: center;
     gap: 20px;
-    justify-content: center;
 
     &__info {
         text-align: center;
     }
 
     &__city {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include d-flex( flex, null, center, center);
         margin: 10px 0px;
     }
 
@@ -26,5 +24,17 @@
         margin-top: 30px;
         text-align: center;
         line-height: 1.5rem;
+    }
+
+    &__temp {
+        font-size: 3rem;
+    }
+
+    &__day {
+        font-size: 2rem;
+    }
+
+    &__name {
+        font-size: 1.5rem;
     }
 }

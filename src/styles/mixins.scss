@@ -1,5 +1,5 @@
-@mixin d-flex($direction: null, $justifyContent: null, $alignItems: null) {
-    display: flex;
+@mixin d-flex( $flex: null, $direction: null, $justifyContent: null, $alignItems: null) {
+    display: $flex;
     flex-direction: $direction;
     justify-content: $justifyContent;
     align-items: $alignItems;
