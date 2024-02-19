@@ -8,12 +8,12 @@
 
     &__container {
         display: flex;
-        gap: 50px;
         margin-top: 40px;
         line-height: 1.8rem;
     }
 
     &__widget {
         text-align: center;
+        padding: 0px 10px 0px 0px;
     }
 }

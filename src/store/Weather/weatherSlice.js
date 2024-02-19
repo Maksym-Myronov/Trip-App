@@ -9,7 +9,7 @@ const initialState = {
 const API_KEY = import.meta.env.VITE_VISUAL_WEATHER_KEY;
 
 export const fetchWeather = createAsyncThunk("weather/fetchWeather", async () => {
-    const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/vinnytsia?unitGroup=metric&key=${API_KEY}&contentType=json`);
+    const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Berlin?unitGroup=metric&key=${API_KEY}&contentType=json`);
     const data = await response.json()
     return data
 })

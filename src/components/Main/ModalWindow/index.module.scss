@@ -1,0 +1,84 @@
+.window {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+
+
+    &__container {
+        background: white;
+        width: 700px;
+        height: 700px;
+        border-radius: 10px;
+        padding: 40px 40px 0px 40px;
+    }
+
+    &__main {
+        margin-bottom: 280px;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__hr {
+        position: relative;
+        border-bottom: 1px solid #b6b5b5;
+        width: 700px;
+        right: 40px;
+        margin: 20px 0px;
+    }
+
+    &__text {
+        margin: 20px 0px;
+    }
+
+    &__close {
+        background: none;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    span {
+        color: red;
+    }
+
+    &__input {
+        outline: none;
+        width: 620px;
+        border: 1px solid grey;
+        padding: 5px;
+        border-radius: 3px;
+    }
+
+    &__buttons {
+        text-align: right;
+    }
+
+    &__cancel {
+        background: none;
+        border: 1px solid lightgrey;
+        border-radius: 5px;
+        padding: 10px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    &__save {
+        background: #58A5FF;
+        border-radius: 5px;
+        padding: 10px 15px 10px 16px;
+        color: white;
+        cursor: pointer;
+    }
+
+}
