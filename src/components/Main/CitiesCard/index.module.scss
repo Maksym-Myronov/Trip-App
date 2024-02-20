@@ -31,8 +31,28 @@
         margin-left: 25px;
     }
 
-    &__info {
+    &__city {
+        padding: 10px 10px 0px 10px;
+        line-height: 1.7rem;
+    }
+
+    &__data {
         padding: 10px 10px;
-        line-height: 1.5rem;
+        line-height: 1.7rem;
+    }
+
+    &__info {
+        padding: 0px 10px 0px 10px;
+    }
+
+    &__maping {
+        display: flex;
+    }
+
+    &__main {
+        background-color: $white;
+        margin: 0px 10px;
+        border-radius: 10px;
+        height: 350px;
     }
 }

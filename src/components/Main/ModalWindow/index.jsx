@@ -2,11 +2,39 @@ import { useEffect, useState } from 'react';
 import { Loader } from "@googlemaps/js-api-loader";
 //Styles
 import styles from './index.module.scss'
+import { addImageAndCity, fetchCards } from '../../../store/Cards/cardSlice';
+import { useDispatch } from 'react-redux';
 
 const ModalWindow = ({handleOpenModalWindow}) => {
     const [photoUrl, setPhotoUrl] = useState("");
-    const API_KEY = import.meta.env.VITE_WEATHER_APP_KEY;
+    const [data, setData] = useState(null)
+    const [lat, setLat] = useState(0)
+    const [lon, setLon] = useState(0)
+    const [value, setValue] = useState('');
+    const [selectedDate, setSelectedDate] = useState('');
 
+    const handleDateChange = (event) => {
+        setValue(event.target.value);
+    };
+
+    const handleChangeSecondDate = (e) => {
+        setSelectedDate(e.target.value)
+    }
+
+    const API_KEY = import.meta.env.VITE_WEATHER_APP_KEY;
+    const dispatch = useDispatch()
+
+    const startData = value.split("-");
+    const reversedDate = `${startData[1]}.${startData[2]}.${startData[0]}`;
+    const endData = selectedDate.split("-")
+    const reversedEndData = `${endData[1]}.${endData[2]}.${endData[0]}`
+
+    const handleAddCard = () => {
+        dispatch(fetchCards({lat: lat, lon: lon}))
+        dispatch(addImageAndCity({ image: photoUrl, cityName: data, startDate: reversedDate, endDate: reversedEndData }))
+        handleOpenModalWindow()
+    }
+    
     const initialize = () => {
         const autocomplete = new window.google.maps.places.Autocomplete(
             document.getElementById("autocomplete"),
@@ -19,6 +47,10 @@ const ModalWindow = ({handleOpenModalWindow}) => {
             if (place.geometry && place.geometry.location) {
                 const lat = place.geometry.location.lat();
                 const lon = place.geometry.location.lng();
+                const name = place && place.vicinity
+                setLat(lat)
+                setLon(lon)
+                setData(name)
             }
 
             if (place.photos && place.photos.length > 0) {
@@ -46,14 +78,14 @@ const ModalWindow = ({handleOpenModalWindow}) => {
     futureDate.setDate(currentDate.getDate() + 15);
 
     const formatDate = (date) => {
-    const year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
+        const year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
 
-    month = month < 10 ? `0${month}` : month;
-    day = day < 10 ? `0${day}` : day;
+        month = month < 10 ? `0${month}` : month;
+        day = day < 10 ? `0${day}` : day;
 
-    return `${year}-${month}-${day}`;
+        return `${year}-${month}-${day}`;
     };
 
     return (
@@ -83,6 +115,8 @@ const ModalWindow = ({handleOpenModalWindow}) => {
                             onFocus={() => { document.getElementById('dateInput').type = 'date'; }}
                             min={formatDate(currentDate)}
                             max={formatDate(futureDate)}
+                            value={value}
+                            onChange={handleDateChange}
                             className={styles.window__input} 
                         />
                     </div>
@@ -95,6 +129,8 @@ const ModalWindow = ({handleOpenModalWindow}) => {
                             onFocus={() => { document.getElementById('date').type = 'date'; }}
                             min={formatDate(currentDate)}
                             max={formatDate(futureDate)}
+                            value={selectedDate}
+                            onChange={handleChangeSecondDate}
                             className={styles.window__input} 
                         />
                     </div>
@@ -102,7 +138,7 @@ const ModalWindow = ({handleOpenModalWindow}) => {
                 <hr className={styles.window__hr}/>
                 <div className={styles.window__buttons}>
                     <button className={styles.window__cancel} onClick={() => handleOpenModalWindow()}>Cancel</button>
-                    <button className={styles.window__save}>Save</button>
+                    <button className={styles.window__save} onClick={() => handleAddCard()}>Save</button>
                 </div>
             </div>
         </div>
