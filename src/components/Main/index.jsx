@@ -8,7 +8,7 @@ import styles from './index.module.scss'
 
 const Main = () => {
 
-    const [currentDay] = useGetData()
+    const [currentDay, currentDayFull] = useGetData()
     const [renderWeatherImage] = useImage()
 
     return (
@@ -21,7 +21,7 @@ const Main = () => {
                 />
             </div>
             <div>
-                <Timer renderWeatherImage={renderWeatherImage} />
+                <Timer renderWeatherImage={renderWeatherImage} currentDayFull={currentDayFull}/>
             </div>
         </div>
     )
