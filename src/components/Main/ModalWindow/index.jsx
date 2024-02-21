@@ -14,12 +14,31 @@ const ModalWindow = ({handleOpenModalWindow}) => {
     const [selectedDate, setSelectedDate] = useState('');
 
     const handleDateChange = (event) => {
-        setValue(event.target.value);
+        const selectedDate = event.target.value;
+        const tomorrow = new Date(currentDate);
+        tomorrow.setDate(currentDate.getDate() + 1);
+    
+        if (selectedDate < formatDate(tomorrow)) {
+            setValue(formatDate(tomorrow));
+        } else {
+            setValue(selectedDate);
+        }
     };
-
-    const handleChangeSecondDate = (e) => {
-        setSelectedDate(e.target.value)
-    }
+    
+    const handleChangeSecondDate = (event) => {
+        const selectedDate = event.target.value;
+    
+        const tomorrow = new Date(currentDate);
+        tomorrow.setDate(currentDate.getDate() + 1);
+    
+        if (selectedDate < formatDate(tomorrow)) {
+            setSelectedDate(formatDate(tomorrow));
+        } else if (selectedDate < value) {
+            setSelectedDate(value);
+        } else {
+            setSelectedDate(selectedDate);
+        }
+    };
 
     const API_KEY = import.meta.env.VITE_WEATHER_APP_KEY;
     const dispatch = useDispatch()
@@ -30,9 +49,13 @@ const ModalWindow = ({handleOpenModalWindow}) => {
     const reversedEndData = `${endData[1]}.${endData[2]}.${endData[0]}`
 
     const handleAddCard = () => {
-        dispatch(fetchCards({lat: lat, lon: lon}))
-        dispatch(addImageAndCity({ image: photoUrl, cityName: data, startDate: reversedDate, endDate: reversedEndData }))
-        handleOpenModalWindow()
+        if (!data || !value || !selectedDate) {
+            return alert("Будь ласка, виберіть місто та дати");
+        }
+    
+        dispatch(fetchCards({ lat: lat, lon: lon }));
+        dispatch(addImageAndCity({ image: photoUrl, cityName: data, startDate: reversedDate, endDate: reversedEndData }));
+        handleOpenModalWindow();
     }
     
     const initialize = () => {
@@ -87,6 +110,10 @@ const ModalWindow = ({handleOpenModalWindow}) => {
 
         return `${year}-${month}-${day}`;
     };
+    
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const tomorrowFormatted = formatDate(tomorrow);
 
     return (
         <div className={styles.window}>
@@ -113,7 +140,7 @@ const ModalWindow = ({handleOpenModalWindow}) => {
                             placeholder="Select Date" 
                             type="text" 
                             onFocus={() => { document.getElementById('dateInput').type = 'date'; }}
-                            min={formatDate(currentDate)}
+                            min={tomorrowFormatted}
                             max={formatDate(futureDate)}
                             value={value}
                             onChange={handleDateChange}
@@ -127,7 +154,7 @@ const ModalWindow = ({handleOpenModalWindow}) => {
                             placeholder="Select Date" 
                             type="text" 
                             onFocus={() => { document.getElementById('date').type = 'date'; }}
-                            min={formatDate(currentDate)}
+                            min={tomorrowFormatted}
                             max={formatDate(futureDate)}
                             value={selectedDate}
                             onChange={handleChangeSecondDate}

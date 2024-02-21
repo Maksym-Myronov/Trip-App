@@ -41,22 +41,32 @@
     }
 
     &__regist {
-        gap: 20px;
+        @include d-flex( flex, null, center, center);
+    }
+
+    &__profile {
+        width: 25px;
+        height: 25px;
+        border-radius: 5px;
         @include d-flex( flex, null, null, center);
     }
 
-    &__button {
+    &__out {
         cursor: pointer;
-        background: none;
-        font-size: 1rem;
+        background: rgba(88, 165, 255, 1);
         color: $white;
+        margin: 0;
+        padding: 5px;
+        border-radius: 5px;
+        margin-right: 20px;
     }
 
-    &__user {
-        width: 25px;
-        height: 25px;
+    &__log {
         cursor: pointer;
-        background: none;
+        background: rgba(88, 165, 255, 1);
         color: $white;
+        margin: 0;
+        padding: 5px;
+        border-radius: 5px;
     }
 }

@@ -15,39 +15,40 @@ const Timer = ({renderWeatherImage, currentDayFull}) => {
     const [hours, setHours] = useState(0)
     const [minutes, setMinutes] = useState(0)
     const [seconds, setSeconds] = useState(0)
-    const [endTime, setEndTime] = useState(0)
     const [startData, setStartData] = useState(0)
-    const card = useSelector((state) => state.card)
+    const forecastInLocalCity = useSelector((state) => state.forecast)
+    useEffect(() => {
+        console.log(forecastInLocalCity);
+    }, [forecastInLocalCity])
 
     const getTime = () => {
-        if (startData && endTime) {
-            const time = Date.parse(startData) - Date.now()
+        if (startData) {
+            const time = Date.parse(startData) - Date.now();
             setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
             setHours(Math.floor((time / (1000 * 60 * 60)) % 24));
             setMinutes(Math.floor((time / 1000 / 60) % 60));
             setSeconds(Math.floor((time / 1000) % 60));
         }
-    }
+    };
     
     useEffect(() => {
         const interval = setInterval(() => {
             getTime();
-        }, 1000);
-    
-        const allEndDates = card && card.cards && card.cards.map((item) => item && item.endDate)
-        const allStartDates = card && card.cards && card.cards.map((item) => item && item.startDate)
-    
-        if (allEndDates && allEndDates[0]) {
-            setEndTime(allEndDates[0]);
-        }
-    
-        if (allStartDates && allStartDates[0]) {
-            setStartData(allStartDates[0]);
-        }
+        }, 0);
     
         return () => clearInterval(interval);
     
-    }, [card, startData, endTime]);
+    }, [startData]);
+    
+    useEffect(() => {
+        const allEndDates = forecastInLocalCity && forecastInLocalCity.forecast && forecastInLocalCity.forecast.days ? forecastInLocalCity.forecast.days.map((item) => item && item.datetime) : [];
+        const firstElement = allEndDates[0];
+        if (firstElement) {
+            const dateObject = new Date(firstElement);
+            const formattedDate = dateObject.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+            setStartData(formattedDate);
+        }
+    }, [forecastInLocalCity]);
 
     return (
         <div className={styles.timer}>
@@ -61,7 +62,7 @@ const Timer = ({renderWeatherImage, currentDayFull}) => {
                             })}
                         <p className={styles.timer__temp}>{temp}°</p>
                     </div>
-                    <p className={styles.timer__name}>{cityName}</p>
+                    <p className={styles.timer__name}>{forecastInLocalCity && forecastInLocalCity.forecast && forecastInLocalCity.forecast.address}</p>
                 </div>
                 <div className={styles.timer__data}>
                     <div>
