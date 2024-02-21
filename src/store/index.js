@@ -1,6 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import weatherReducer from './Weather/weatherSlice'
-import cardReducer from './Cards/cardSlice'
+import weatherReducer from './Weather/weatherSlice';
+import cardReducer from './Cards/cardSlice';
+import forecastReducer from './Forecast/forecastSlice';
 import { 
     persistStore,
     persistReducer,
@@ -17,6 +18,7 @@ import storage from 'redux-persist/lib/storage';
 const rootReducer = combineReducers({
     weather: weatherReducer,
     card: cardReducer,
+    forecast: forecastReducer,
 });
 
 const persistConfig = {

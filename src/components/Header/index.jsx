@@ -1,10 +1,13 @@
+import Login from './Login'
+import Logout from './Logout'
+import Profile from './Profile'
 //Styles
 import styles from './index.module.scss'
 //Images
-import userPhoto from '../../assets/images/user.png'
 import search from '../../assets/images/icons8-search.svg'
 
 const Header = () => {
+
     return (
         <div className={styles.header}>
             <div className={styles.header__search}> 
@@ -19,9 +22,13 @@ const Header = () => {
                 </div>
             </div>
             <div className={styles.header__regist}>
-                <button className={styles.header__button}>Log on</button>
-                <button className={styles.header__button}>Sign in</button>
-                <button className={styles.header__user}><img src={userPhoto} alt="userPhoto" /></button>
+                <div>
+                    <Login />
+                    <Logout />
+                </div>
+                <div>
+                    <Profile />
+                </div>
             </div>
         </div>
     )
