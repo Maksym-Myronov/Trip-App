@@ -6,14 +6,22 @@
     border-radius: 10px;
     margin-top: 40px;
 
+
     &__container {
-        display: flex;
         margin-top: 40px;
+        // width: 700px !important;
         line-height: 1.8rem;
     }
 
     &__widget {
         text-align: center;
         padding: 0px 10px 0px 0px;
+        margin-right: 500px;
+    }
+
+    &__widgets {
+        text-align: center;
+        padding: 0px 10px 0px 0px;
+        display: inline-block;
     }
 }
