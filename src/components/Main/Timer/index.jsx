@@ -17,13 +17,17 @@ const Timer = ({renderWeatherImage, currentDayFull}) => {
     const [seconds, setSeconds] = useState(0)
     const [startData, setStartData] = useState(0)
     const forecastInLocalCity = useSelector((state) => state.forecast)
-    useEffect(() => {
-        console.log(forecastInLocalCity);
-    }, [forecastInLocalCity])
+    const currentDate = new Date();
+    const tomorrowDate = new Date(currentDate);
+    tomorrowDate.setDate(currentDate.getDate() + 1);
+
+    const formattedStartDates = tomorrowDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
     const getTime = () => {
-        if (startData) {
-            const time = Date.parse(startData) - Date.now();
+        const startDateToUse = startData || formattedStartDates;
+    
+        if (startDateToUse) {
+            const time = Date.parse(startDateToUse) - Date.now();
             setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
             setHours(Math.floor((time / (1000 * 60 * 60)) % 24));
             setMinutes(Math.floor((time / 1000 / 60) % 60));
@@ -39,16 +43,20 @@ const Timer = ({renderWeatherImage, currentDayFull}) => {
         return () => clearInterval(interval);
     
     }, [startData]);
-    
+
     useEffect(() => {
         const allEndDates = forecastInLocalCity && forecastInLocalCity.forecast && forecastInLocalCity.forecast.days ? forecastInLocalCity.forecast.days.map((item) => item && item.datetime) : [];
         const firstElement = allEndDates[0];
         if (firstElement) {
             const dateObject = new Date(firstElement);
             const formattedDate = dateObject.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
             setStartData(formattedDate);
         }
     }, [forecastInLocalCity]);
+
+    const tempCalculation =(forecastInLocalCity && forecastInLocalCity.forecast && forecastInLocalCity.forecast.days && forecastInLocalCity.forecast.days[0] && forecastInLocalCity.forecast.days[0].temp - 32) * 5 / 9;
+    const temperature = forecastInLocalCity.error !== undefined ? Math.floor(tempCalculation) : temp;
 
     return (
         <div className={styles.timer}>
@@ -60,9 +68,9 @@ const Timer = ({renderWeatherImage, currentDayFull}) => {
                                 width: '50px',
                                 height: '50px',
                             })}
-                        <p className={styles.timer__temp}>{temp}°</p>
+                        <p className={styles.timer__temp}>{temperature}</p>
                     </div>
-                    <p className={styles.timer__name}>{forecastInLocalCity && forecastInLocalCity.forecast && forecastInLocalCity.forecast.address}</p>
+                    <p className={styles.timer__name}>{forecastInLocalCity.error !== undefined ? forecastInLocalCity && forecastInLocalCity.forecast && forecastInLocalCity.forecast.address : cityName}</p>
                 </div>
                 <div className={styles.timer__data}>
                     <div>

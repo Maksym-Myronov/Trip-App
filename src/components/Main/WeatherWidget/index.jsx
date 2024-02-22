@@ -22,7 +22,7 @@ const WeatherWidget = ({ currentDay, renderWeatherImage }) => {
         infinite: true,
         speed: 500,
         slidesToShow: 7,
-        slidesToScroll: 7,
+        slidesToScroll: 1,
     };
 
     const sliderStyles = {
@@ -33,10 +33,10 @@ const WeatherWidget = ({ currentDay, renderWeatherImage }) => {
         <div className={styles.weather}>
             <h1>Weekly weather forecast</h1>
             <div className={styles.weather__container}>
-                <Slider {...settings} style={sliderStyles}>
+                <Slider {...settings} style={sliderStyles} className={styles.customSlider}>
                     {forecastInLocalCity.error !== undefined ? (
                         forecastInLocalCity.forecast && forecastInLocalCity.forecast.days && forecastInLocalCity.forecast.days.map((item, index) => (
-                            <div key={index} className={styles.weather__widget}>
+                            <div key={item.image} className={styles.weather__widgets}>
                                 <p>{currentDay[index % 7]}</p>
                                 {renderWeatherImage(item?.icon, {
                                     width: '50px',
@@ -48,23 +48,23 @@ const WeatherWidget = ({ currentDay, renderWeatherImage }) => {
                                     {Math.floor((item?.tempmax - 32) * 5/9)} / {Math.floor((item?.temp - 32) * 5/9)}
                                 </p>
                             </div>
-                        ))
-                    ) : (
-                        daysForecast && daysForecast.map((item, index) => (
-                            <div key={index} className={styles.weather__widget}>
-                                <p>{currentDay[index % 7]}</p>
-                                {renderWeatherImage(item?.icon, {
-                                    width: '50px',
-                                    height: '50px',
-                                    display: 'block',
-                                    margin: '0 auto',
-                                })}
-                                <p>
-                                    {Math.floor(item?.tempmax)} / {Math.floor(item?.temp)}
-                                </p>
-                            </div>
-                        ))
-                    )}
+                            ))
+                            ) : (
+                            daysForecast && daysForecast.map((item, index) => (
+                                <div key={item.datetime} className={styles.weather__widget}>
+                                    <p>{currentDay[index % 7]}</p>
+                                    {renderWeatherImage(item?.icon, {
+                                        width: '50px',
+                                        height: '50px',
+                                        display: 'block',
+                                        margin: '0 auto',
+                                    })}
+                                    <p>
+                                        {Math.floor(item?.tempmax)} / {Math.floor(item?.temp)}
+                                    </p>
+                                </div>
+                            ))
+                        )}
                 </Slider>
             </div>
         </div>
